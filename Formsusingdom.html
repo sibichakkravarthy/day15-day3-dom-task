@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <fieldset style="border-radius: 6px;">
+        <legend><B>Registration Form</B></legend>
+    <form onsubmit="" method="get">
+            
+        <div>
+            <label><b>First name:</b> </label>
+            <input
+            type="text"
+            placeholder="type your first name"
+            name="name"
+        />
+       </div>
+       <br>
+       <div>
+        <label><b>Last name:</b> </label>
+        <input
+        type="text"
+        placeholder="type your last name"
+        />
+       </div>
+       <br>
+       <div>
+       <label><b>Address:</b></label>
+       <textarea name="Address" rows="3" cols="40">
+
+       </textarea>
+    </div>
+    <br>
+    <div>
+        <label><b>Pincode:</b></label>
+        <input type="number" placeholder="type pincode" pattern="[1-10]{6}"
+        title="six number pincode"
+        />
+    </div>
+    <br>
+    <div>
+        <label><b>Gender:</b></label>
+        <input type="radio" />Male
+        <input type="radio" />Female
+    </div>
+    <br>
+       <div>
+        <label for="country"><b>Country:</b></label>
+        <select style="border-radius: 6px;"> 
+            <option>--/--</option>           
+            <option value="india">India</option>
+            <option value="Usa">USA</option>
+            <option value="Europe">Europe</option> 
+            <option value="china">china</option>  
+            <option value="japan">Japan</option>
+        </select>
+      </div>
+      <br>
+      <div>
+      <label for="State"><b>State:</b></label>
+        <select style="border-radius: 6px;"> 
+            <option>--/--</option>           
+            <option value="tamilnadu">Tamilnadu</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Maharashta">Maharashta</option> 
+            <option value="Karnataka">Karnataka</option>  
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Telangana">Telangana</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="food"><b>Choice of food(must choose at least 2 out of 5 options)</b></label>
+        <input type="checkbox"/>
+        <label>Briyani</label>
+        <input type="checkbox"/>
+        <label>Meals<label>
+        <input type="checkbox"/>   
+        <label>Fried Rice</label> 
+        <input type="checkbox"/>   
+        <label>Noodles</label> 
+        <input type="checkbox"/>   
+        <label>Pizza</label>    
+    </div>
+    <br>
+    <hr>
+    
+    <button style="border-radius: 5px;">SUBMIT</button>
+    <button style="border-radius: 5px;">CANCEL</button>
+    </form>
+</fieldset>
+    
+</body>
+</html>

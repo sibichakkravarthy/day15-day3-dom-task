@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+      <meta name="title" content="Pagination">
+      <meta name="description" content ="GUVI - tasks - This is pagination task given in guvi zen class Bootcamp in 2021. ">
+    <!--css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <style>
+        h1{
+            color:beige;
+        }
+        .answer-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgb(59, 37, 140);
+    color: rgb(43, 43, 43);
+}
+
+html{
+    margin: 0;
+    overflow-x: hidden;
+    scrollbar-width: 1px;
+    background-color: wheat;
+    color:rgb(43, 43, 43);
+}
+body{
+    margin: 0px;
+    background-color: wheat;
+}
+
+.jumbo{
+    padding: 2%;
+    margin: 1%;
+    width: 100%;
+    max-width: 1000px;
+}
+
+#workspace1{
+    background-color: rgb(43, 42, 42);
+    color: rgb(228, 227, 227);
+    padding: 2%;
+    margin: 1%;
+    border-radius: 4px;
+}
+
+.anSpace{
+    background-color: rgb(43, 42, 42);
+    color: rgb(228, 227, 227);
+    padding: 20px;
+    margin: 1%;
+    border-radius: 4px;
+    align-items: center;
+    overflow: auto;
+}
+ .btn:focus{
+    outline: none;
+    box-shadow: none;
+  
+}
+.page-btns{
+    display: flex;
+   width: 100%;
+    overflow-x: auto;
+}
+
+.link{
+    color: rgb(247, 51, 142);
+}
+
+code{
+    font-family:'Courier New', Courier, monospace ;
+    /* background-color: grey; */
+    padding: 2px;
+    /* border-radius: 3px; */
+    color: rgb(109, 109, 109);
+}
+ 
+.line{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.line:before, .line:after {
+    content:"  ";
+    flex : 1 1;
+    border-bottom: 1px solid #797979;
+    margin: auto;
+}
+
+.line span{
+    padding: 3px;
+    margin: 3px;
+}
+
+table,thead, tbody, tr, th, td{
+    border: none;
+}
+tr{
+    background-color:rgb(99, 99, 99);
+    color:rgb(228, 227, 227)
+}
+tr:nth-child(odd){
+    background-color:aliceblue;
+    color:rgb(43, 42, 42)
+}
+
+button{
+    margin: 1%
+}
+.d-flex{
+    align-items: center;
+    
+    justify-content: center
+}
+
+footer{
+    background-color: rgb(43, 42, 42);
+    width: 100%;
+    color: #b9b8b8;
+    padding: 10px;
+
+}
+footer h6{
+    color: white;
+}
+
+nav{
+    background-color:rgb(43, 42, 42);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(3, 4, 105);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+    </style>
+</head>
+<body>
+ <div  class="answer-box">
+<div class="jumbo">
+  <h1>Pagination Task | GUVI</h1>
+  <div id="displayArea" class="anSpace">
+    <p class="text-center" style="color: white;">Page <span id="currentPage" class="link"></span> / <span id="totalPages" ></span></p>
+<table class="table">
+  <thead class="thead-dark">
+    
+      <tr>
+       <th>id</th>
+       <th>Name</th>
+       <th>Email</th>
+      </tr>
+    
+  </thead>
+  <tbody id="tbody">
+
+  </tbody>
+</table>
+  </div>
+  <div class="anSpace ">
+
+   <div class="page-btns" id="pageBtns"></div> 
+   <div class="d-flex">
+   <button class="btn btn-dark" id="first"> <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i> First </button>
+    <button class="btn btn-dark" id="prev" > <i class="fa fa-chevron-left"></i> Prev </button>
+    <button class="btn btn-dark" id="next" > Next <i class="fa fa-chevron-right"></i> </button>
+    <button class="btn btn-dark" id="last" > Last <i class="fa fa-chevron-right"></i> <i class="fa fa-chevron-right"></i> </button>
+    </div>
+  </div>
+</div>
+ </div>
+
+<!--scripts-->
+
+    <script>var data = fetch('https://gist.githubusercontent.com/rvsp/add40254aa126f045837fa5b51f47f1f/raw/4d724bfabf4cce7379a386e23bef6576ab99a2f9/pagination.json').then(response => response.json())
+        //initiate Elements
+        var tbody = document.getElementById('tbody')
+        var tr = () => document.createElement('tr')
+        var btn = () => document.createElement('button')
+        var  td = () => document.createElement('td')
+        var nextBtn = document.getElementById('next')
+        var prevBtn = document.getElementById('prev')
+        var firstBtn = document.getElementById('first')
+        var lastBtn = document.getElementById('last')
+        var currentPage = document.getElementById('currentPage')
+        var totalPage = document.getElementById('totalPages')
+        var pageCon = document.getElementById('pageBtns')
+        
+        // initiate class for pagination task
+        
+        class Pagination {
+        constructor(){
+            this.firstIndex = 0 
+            
+        // generate buttons
+        data.then(data=>{
+        var numOfBtn = data.length/5;
+        for(let i = 0 ; i < numOfBtn ; i++){
+           var pageBtn = btn()
+           pageBtn.setAttribute('onclick',`page.setPage(${i})`)
+           pageBtn.setAttribute('class', 'btn btn-dark')
+           pageBtn.innerHTML = i+1
+        
+           pageCon.append(pageBtn)
+        }
+        }).catch(err => console.log(err))
+        }
+        
+        // logic for pagination buttons
+        buttons(){
+            data.then(data=>{
+                
+                // condition logic for next button
+                if(this.firstIndex < data.length-6   && this.firstIndex >= 0){
+                nextBtn.style.display = "block"
+            } else {
+                nextBtn.style.display = "none"
+            }
+            // condition logic for prev btn
+        
+            if(this.firstIndex > 0 && this.firstIndex < data.length){
+                prevBtn.style.display = "block"
+            }else{
+                prevBtn.style.display = "none"
+            }
+        
+            }).catch(err => console.log(err))
+        }
+        
+        // to display table contents
+        display(){
+        data.then(data=>{
+            // console.log(data.length)
+           // navigation i.e showing current and total page number
+            
+            totalPage.innerHTML = data.length/5;
+            currentPage.innerHTML = (this.firstIndex/5)+1
+            
+            //display table
+            tbody.innerHTML = ''
+            for(let i = this.firstIndex ; i < this.firstIndex+5; i++){
+            
+                // console.log(data[i].id)
+                var row = tr()
+                var rowData = [td(), td(), td()]
+                rowData[0].innerHTML = data[i].id
+                rowData[1].innerHTML = data[i].name
+                rowData[2].innerHTML = data[i].email
+                row.append(...rowData)
+                tbody.append(row)
+            }
+            
+        }).catch(err => console.log(err))
+        this.buttons()
+        }
+        
+        // to change next page
+        next(){
+           
+            this.firstIndex = this.firstIndex + 5
+            this.display()
+           
+        }
+        
+        // to change previous page
+        prev(){
+            this.firstIndex = this.firstIndex - 5
+            this.display()
+        }
+        
+        // to set the page number
+        setPage(num){
+        this.firstIndex = num *5
+        this.display()
+        }
+        lastPage(){
+            data.then(data=>{
+                this.setPage((data.length/5)-1)
+            }).catch(err => console.log(err))
+        }
+        }
+        
+        
+        
+        var page = new Pagination()
+        page.display()
+        
+        // button actions i.e click event actions
+        
+        firstBtn.addEventListener('click', ()=>page.setPage(0))
+        lastBtn.addEventListener('click', ()=>page.lastPage())
+        nextBtn.addEventListener('click', ()=> page.next())
+        prevBtn.addEventListener('click', ()=> page.prev())</script>
+        
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+</body>
+</html>
